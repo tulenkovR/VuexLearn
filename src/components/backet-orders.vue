@@ -19,7 +19,7 @@ import {mapGetters} from 'vuex';
     export default {
 				methods: {
 						cancelBuy(prod) {
-              this.$store.commit('deleteProduct',prod.productId);
+              this.$store.dispatch('delete', prod.productId);
 						}
 				},
         computed: mapGetters({

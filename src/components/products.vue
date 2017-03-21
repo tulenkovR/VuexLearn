@@ -18,7 +18,7 @@
 				},
 				methods: {
 						buyProduct(product) {
-								this.$store.commit('buyProduct',product.id);
+								this.$store.dispatch('buy', product.id);
 						}
 				}
 		}
