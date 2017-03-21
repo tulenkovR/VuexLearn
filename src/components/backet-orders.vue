@@ -15,23 +15,27 @@
 
 <script>
 		export default {
-				props: {
-					backet: {
-						type: Array,
-						required: true
-					}
-				},
 				methods: {
 						cancelBuy(prod) {
-								this.$emit('cancelBuy', prod);
+              const product_find = this.$store.state.products.find(product => {
+                return product.id === prod.productId;
+              });
+
+					  product_find.buy = false;
+
+					  this.$store.state.backet = this.$store.state.backet.filter(product => product.productId !== prod.productId);
+
 						}
 				},
 				computed: {
 						total() {
-								return this.backet.reduce((sum, current) => {
+								return this.$store.state.backet.reduce((sum, current) => {
 									return sum + current.price;
 								}, 0);
-						}
+						},
+            backet() {
+              return this.$store.state.backet;
+            }
 				}
 		}
 </script>

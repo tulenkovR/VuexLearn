@@ -11,16 +11,17 @@
 
 <script>
 		export default {
-				props: {
-					products: {
-						type: Array,
-						required: true
+				computed: {
+					products() {
+						return this.$store.state.products.filter((product) => {
+						return !product.buy;
+						});;
 					}
 				},
 				methods: {
 						buyProduct(product) {
-								this.$emit('buyProduct', product);
 								product.buy = true;
+								this.$store.state.backet.push({productId: product.id, name: product.name, price: product.price});
 						}
 				}
 		}
