@@ -1,30 +1,28 @@
 <template>
-		<div id="products">
-				<h3>Products</h3>
-				<hr>
-				<div class="row" v-for="product in products">
-						<h4>{{ product.name }} price - {{ product.price }}</h4>
-						<button @click="buyProduct(product)">Buy</button>
-				</div>
-		</div>
+  <div id="products">
+    <h3>Products</h3>
+    <hr>
+    <div class="row" v-for="product in products">
+      <h4>{{ product.name }} price - {{ product.price }}</h4>
+      <button @click="buyProduct(product)">Buy</button>
+    </div>
+  </div>
 </template>
 
 <script>
 		export default {
 				computed: {
 					products() {
-						return this.$store.state.products.filter((product) => {
-						return !product.buy;
-						});;
+						return this.$store.getters.products;
 					}
 				},
 				methods: {
 						buyProduct(product) {
-								product.buy = true;
-								this.$store.state.backet.push({productId: product.id, name: product.name, price: product.price});
+								this.$store.commit('buyProduct',product.id);
 						}
 				}
 		}
+
 </script>
 
 <style scoped>
@@ -53,4 +51,5 @@
 		button:hover {
 				background-color: green;
 		}
+
 </style>

@@ -1,8 +1,8 @@
 <template>
-	<div id="app">
-		<app-products></app-products>
-		<app-backet-orders></app-backet-orders>
-	</div>
+  <div id="app">
+    <app-products></app-products>
+    <app-backet-orders></app-backet-orders>
+  </div>
 </template>
 
 <script>
@@ -16,6 +16,7 @@ export default {
 				appProducts: Products
 		}
 }
+
 </script>
 
 <style>
@@ -27,4 +28,5 @@ export default {
 	color: #2c3e50;
 	margin-top: 60px;
 }
+
 </style>

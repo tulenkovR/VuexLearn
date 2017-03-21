@@ -1,46 +1,36 @@
 <template>
-		<div id="backet">
-				<div class="summary">
-						<h3>Backet</h3>
-						<h5>Total summa buys: {{ total }}</h5>
-				</div>
-				<hr>
-				<div class="row" v-for="prod in backet">
-						<h4>{{ prod.name }}</h4>
-						<button  @click="cancelBuy(prod)">Delete</button>
-						<div class="price">{{ prod.price }}</div>
-				</div>
-		</div>
+  <div id="backet">
+    <div class="summary">
+      <h3>Backet</h3>
+      <h5>Total summa buys: {{ total }}</h5>
+    </div>
+    <hr>
+    <div class="row" v-for="prod in backet">
+      <h4>{{ prod.name }}</h4>
+      <button @click="cancelBuy(prod)">Delete</button>
+      <div class="price">{{ prod.price }}</div>
+    </div>
+  </div>
 </template>
 
 <script>
-		export default {
+import {mapGetters} from 'vuex';
+
+    export default {
 				methods: {
 						cancelBuy(prod) {
-              const product_find = this.$store.state.products.find(product => {
-                return product.id === prod.productId;
-              });
-
-					  product_find.buy = false;
-
-					  this.$store.state.backet = this.$store.state.backet.filter(product => product.productId !== prod.productId);
-
+              this.$store.commit('deleteProduct',prod.productId);
 						}
 				},
-				computed: {
-						total() {
-								return this.$store.state.backet.reduce((sum, current) => {
-									return sum + current.price;
-								}, 0);
-						},
-            backet() {
-              return this.$store.state.backet;
-            }
-				}
+        computed: mapGetters({
+            total: 'total',
+            backet:'backet'
+          })
 		}
+
 </script>
 
-<style>
+<style scoped>
 		#backet {
 				box-shadow: 1px 1px 2px 1px #ccc;
 				margin: 20px;
@@ -84,4 +74,5 @@
 		button:hover {
 				background-color: green;
 		}
+
 </style>
